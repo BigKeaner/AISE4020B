@@ -1,0 +1,14 @@
+# The following were ran in order to test the Cartographer Mapping functionality, a video of it is in the google drive link.
+
+sh ~/start_agent_rpi5.sh
+sh ros2_humble.sh 
+
+#These are all functions from the Yahboom directory in which we edit
+ros2 launch yahboomcar_bringup yahboomcar_bringup_launch.py
+ros2 launch yahboomcar_nav display_launch.py
+ros2 launch yahboomcar_nav map_cartographer_launch.py
+
+#keyboard
+ros2 run yahboomcar_ctrl yahboom_keyboard
+
+ros2 launch yahboomcar_nav save_map_launch.py
