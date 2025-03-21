@@ -1,0 +1,5 @@
+# The following commands were ran in order, the result of the video can be seen on google drive.
+
+sh ~/start_agent_rpi5.sh
+sh ros2_humble.sh 
+ros2 run yahboomcar_astra  follow_line # This references the file from the robot's directory, in which we edit.
