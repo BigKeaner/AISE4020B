@@ -87,18 +87,17 @@ def adjust_movement(line_position):
         print("Moving forward")
         # Add code to move the robot forward
 
-def stop_movement():
+def stop_movement(moving, joy_active, switch):
     # Implement logic to stop the robot's movement
     print("Stopping movement")
     # Stop movement if the tape line is no longer visible
-    if not Moving:  # Check if the robot is currently moving
-
+    if not moving:  # Check if the robot is currently moving
         print("Tape line is no longer visible, looking for nearby tapelines.")
         # Add code to search for nearby tapelines
     # Check if in waypoint finding mode and if the waypoint has been reached
-    if Joy_active and Switch:
-
+    if joy_active and switch:
         print("Reached waypoint, stopping movement")
+
 
 def avoid_red_lines(frame):
     # Implement logic to detect red lines and navigate around them
