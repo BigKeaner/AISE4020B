@@ -1,5 +1,16 @@
 import random
 import time
+import rclpy
+from rclpy.node import Node
+from geometry_msgs.msg import Twist
+from sensor_msgs.msg import Image
+from astra_color_point import PointCloud
+from astra_common import color_follow
+from barcodeDetection import decode
+from base_node_X3 import OdomPublisher
+from calibrate_angular import Calibrateangular
+from calibrate_linear import CalibrateLinear
+from colorHSV import Color_Identify
 
 # Function to drive around the area and map it
 def map_area():
@@ -8,7 +19,8 @@ def map_area():
     paths = []
 
     print("Mapping the area...")
-    qr_codes = detect_qr_codes()  # Function to detect QR codes in the area
+    point_cloud = PointCloud('pub_point_cloud')  # Initialize PointCloud for image processing
+    # Use point_cloud to process images and detect QR codes
 
     for qr in qr_codes:
         assign_waypoint(qr)  # Function to assign detected QR code as a waypoint
@@ -17,17 +29,17 @@ def map_area():
 
 # Function to detect QR codes in the area
 def detect_qr_codes():
-    # TODO: Implement QR code detection logic
+    # Implement barcode detection logic
     return []  # Placeholder for detected QR codes
 
 # Function to assign detected QR code as a waypoint
 def assign_waypoint(qr):
-    # TODO: Implement waypoint assignment logic
+    # Implement waypoint assignment logic using color_follow
     print(f"Assigned waypoint: {qr}")
 
 # Function to mark red tape lines as paths
 def mark_tape_lines():
-    # TODO: Implement logic to mark tape lines
+    # Implement logic to mark tape lines using color_follow
     print("Marked tape lines as paths.")
     return []  # Placeholder for paths
 
@@ -43,17 +55,17 @@ def navigate_to_random_waypoint():
 
 # Function to retrieve waypoints after mapping
 def get_waypoints():
-    # TODO: Implement logic to retrieve waypoints
+    # Implement logic to retrieve waypoints using microross2
     return []  # Placeholder for waypoints
 
 # Function to find the closest path to the waypoint
 def find_closest_path(random_waypoint):
-    # TODO: Implement logic to find the closest path
+    # Implement logic to find the closest path using microross2
     return None  # Placeholder for closest path
 
 # Function to follow the path
 def follow_path(closest_path):
-    # TODO: Implement logic to follow the path
+    # Implement logic to follow the path using microross2
     print(f"Following path: {closest_path}")
 
 # Function to continuously monitor for obstacles
@@ -67,12 +79,12 @@ def monitor_obstacles():
 
 # Function to check for detected obstacles
 def check_for_obstacles():
-    # TODO: Implement obstacle detection logic
+    # Implement obstacle detection logic using microross2
     return False  # Placeholder for obstacle detection
 
 # Function to handle detected obstacles
 def handle_obstacle():
-    # TODO: Implement obstacle handling logic
+    # Implement obstacle handling logic using microross2
     print("Obstacle detected! Handling obstacle...")
 
 # Function to allow manual control
@@ -82,10 +94,13 @@ def manual_control():
 
 # Main function to run the navigation system
 def main():
+    rclpy.init()
+    node = Node("navigation_node")
     map_area()
     navigate_to_random_waypoint()
     monitor_obstacles()
     manual_control()
+    rclpy.spin(node)
 
 if __name__ == "__main__":
     main()
